@@ -1,0 +1,33 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "omni-price"
+version = "0.1.0"
+description = "开源全网比价引擎：淘宝/京东/拼多多多平台价格聚合对比"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.30",
+    "httpx>=0.27",
+    "pydantic>=2.7",
+    "typer>=0.12",
+    "sqlalchemy>=2.0",
+]
+
+[project.optional-dependencies]
+browser = ["playwright>=1.45"]
+mcp = ["mcp>=1.0"]
+dev = ["pytest>=8.0", "pytest-asyncio>=0.23", "ruff>=0.5"]
+
+[project.scripts]
+omni-price = "omniprice.cli:app"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/omniprice"]
+
+[tool.ruff]
+line-length = 100
